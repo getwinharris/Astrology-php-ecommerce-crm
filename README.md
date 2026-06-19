@@ -75,7 +75,8 @@ Module notes:
 ## What This App Includes
 
 - Product catalog, category browsing, product detail pages, cart, checkout, and Razorpay verification flow.
-- Remote astrologer marketplace with call/message actions, waitlist/offline states, credit pricing, and account session history.
+- Remote astrologer marketplace with 21 client-provided profiles, admin-created provider accounts, private message rooms, browser audio calls, waitlist/offline states, credit pricing, and session history.
+- Astrologer workspace at `/astrologer`; customer/provider communication uses authenticated PHP JSON APIs with short polling and WebRTC signaling, without a CLI or WebSocket service.
 - Login-gated wallet recharge flow with Razorpay top-up order creation, service charge/tax breakdown, and credit balance shown in the user panel.
 - Floating support assistant that can answer product, order, wallet, and astrologer session questions and store support tickets for admin review.
 - Five-star review collection for ended astrology sessions and post-shipment product reviews.
@@ -91,7 +92,7 @@ Module notes:
 ## Stack
 
 - Frontend: PHP-rendered templates in `views/`.
-- Styling: `assets/css/band.css` plus critical inline layout CSS.
+- Styling: `Design.md` is the canonical public UI contract; `assets/css/band.css` plus matching critical inline layout CSS implement it.
 - Backend: PHP controllers, services, and router under `app/`; built to be php json agent ready.
 - Data: JSON files in `storage/data/`, described by `storage/schema/collections.json`; this is the local json-database.
 - Integrations: Razorpay and Google OAuth scaffolding in `integrations/`.
@@ -172,7 +173,7 @@ The built-in skill folder is part of the product, not an external plugin:
 - `.agents/skills/<skill-name>/SKILL.md` for task-specific agent workflows.
 - `AGENTS.md` plus child `AGENTS.md` files for always-on DOX repository instructions.
 
-For a new project, tell the agent to read `AGENTS.md`, `storage/schema/collections.json`, `docs/systematic-map.mmd`, and the matching skill folder first. The ready backend remains stable, while the modifiable frontend and content can change depending on the project.
+For a new project, tell the agent to read `AGENTS.md`, `Design.md` for public UI work, `storage/schema/collections.json`, `docs/systematic-map.mmd`, and the matching skill folder first. The ready backend remains stable, while the modifiable frontend and content can change depending on the project.
 
 ## Agent Development Rules
 
@@ -198,4 +199,5 @@ This README is optimized for the developer search phrase **php json agent ready*
 - Google OAuth requires configured credentials and callback URL.
 - SMTP requires configured secrets and cron for real email delivery.
 - Remote call/message credit charging still needs production-grade wallet/session timers.
+- Browser calls require HTTPS, microphone permission, and production ICE/TURN configuration for networks that cannot establish a direct WebRTC connection.
 - Coupon workflow should remain disabled until totals and discount rules are implemented and tested.
